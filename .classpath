@@ -1,10 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="var" path="ICY_JAR"/>
-	<classpathentry kind="var" path="ICY_PLUGINS/adufour/ezplug/EzPlug.jar"/>
-	<classpathentry kind="var" path="ICY_PLUGINS/adufour/blocks/Blocks.jar"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="var" path="ICY_PLUGINS/adufour/roi/LabelExtractor.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="lib" path="F:/SDKs/Java/jdk1.8.0_241/lib/tools.jar"/>
+	<classpathentry kind="lib" path="F:/SDKs/Java/jdk1.8.0_241/lib/tools.jar"/>
+	<classpathentry kind="var" path="USER_HOME/SDKs/Java/jdk1.8.0_251/lib/tools.jar"/>
+	<classpathentry kind="var" path="USER_HOME/SDKs/Java/jdk1.8.0_251/lib/tools.jar"/>
+	<classpathentry kind="var" path="USER_HOME/SDKs/Java/jdk1.8.0_251/lib/tools.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bioimageanalysis.icy:icy-kernel:2.1.0"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: net.sf.ehcache:ehcache:2.10.6"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.slf4j:slf4j-api:1.7.25"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bioimageanalysis.icy:icy-bioformats:6.3.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bioimageanalysis.icy:icy-insubstantial:7.3.7"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bioimageanalysis.icy:icy-vtk:6.3.0.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: net.imagej:ij:1.52q"/>
+	<classpathentry kind="var" path="USER_HOME/SDKs/Java/jdk1.8.0_251/lib/tools.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: javax.media:jai-core:1.1.3"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: javax.media:jai-codec:1.1.3"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.jogamp.jogl:jogl-all:2.1.5-01"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.jogamp.jogl:jogl-all-natives-linux-amd64:2.1.5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.jogamp.jogl:jogl-all-natives-linux-i586:2.1.5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.jogamp.jogl:jogl-all-natives-macosx-universal:2.1.5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.jogamp.jogl:jogl-all-natives-windows-amd64:2.1.5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.jogamp.jogl:jogl-all-natives-windows-i586:2.1.5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.jogamp.gluegen:gluegen-rt:2.1.5-01"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.jogamp.gluegen:gluegen-rt-natives-linux-amd64:2.1.5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.jogamp.gluegen:gluegen-rt-natives-linux-i586:2.1.5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.jogamp.gluegen:gluegen-rt-natives-macosx-universal:2.1.5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.jogamp.gluegen:gluegen-rt-natives-windows-amd64:2.1.5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.jogamp.gluegen:gluegen-rt-natives-windows-i586:2.1.5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.javassist:javassist:3.22.0-GA"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: net.sourceforge.jexcelapi:jxl:2.6.12"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: log4j:log4j:1.2.14"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.swinglabs.swingx:swingx-all:1.6.5-1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bioimageanalysis.icy:icy-blocks:1.0.1"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bioimageanalysis.icy:icy-protocols:3.0.9"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bioimageanalysis.icy:icy-javadocparser:1.0.0"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.nativelibs4java:ochafik-util:0.12"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bioimageanalysis.icy:icy-ezplug:3.15.13"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bioimageanalysis.icy:icy-label-extractor:1.5.0"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.bioimageanalysis.icy:icy-sequence-blocks:2.0.14"/>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>

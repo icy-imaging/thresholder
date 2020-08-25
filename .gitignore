@@ -1,2 +1,8 @@
-bin
-Thresholder*.jar
+.idea/
+.settings/
+build/
+target/
+*.iml
+*.eml
+.classpath
+.project
