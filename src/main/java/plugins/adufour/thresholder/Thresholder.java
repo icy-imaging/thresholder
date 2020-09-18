@@ -308,13 +308,16 @@ public class Thresholder extends EzPlug implements Block
      * Note: thresholds are inclusive: values equal to a threshold are considered as "above"<br>
      * 
      * @param input
+     *        Input sequence.
      * @param c
-     * @param thresholds
+     *        Channel index from which the thresholding is performed.
+     * @param thresholdsInT
      *        a list of thresholds for each time point of the input sequence
      * @param inPlace
-     * @return
+     *        If true, the result is stored in the input sequence. A new sequence is returned otherwise.
+     * @return The thresholded sequence.
      */
-    public static Sequence threshold(Sequence input, int c, double[][] thresholdsT, boolean inPlace)
+    public static Sequence threshold(Sequence input, int c, double[][] thresholdsInT, boolean inPlace)
     {
         if (input == null)
             throw new IllegalArgumentException("Thresholder: no input sequence given");
@@ -333,15 +336,15 @@ public class Thresholder extends EzPlug implements Block
 
         for (int t = 0; t < input.getSizeT(); t++)
         {
-            double[] thresholds = thresholdsT[t];
+            double[] thresholdValues = thresholdsInT[t];
 
-            if (thresholds == null || thresholds.length == 0)
+            if (thresholdValues == null || thresholdValues.length == 0)
                 throw new IllegalArgumentException("Thresholder: no thresholds given");
 
-            double thr0 = thresholds[0];
-            int maxThresholdIndex = thresholds.length - 1;
-            if (thresholds.length > maxClass)
-                maxClass = thresholds.length;
+            double thr0 = thresholdValues[0];
+            int maxThresholdIndex = thresholdValues.length - 1;
+            if (thresholdValues.length > maxClass)
+                maxClass = thresholdValues.length;
 
             for (int z = 0; z < input.getSizeZ(); z++)
             {
@@ -386,7 +389,7 @@ public class Thresholder extends EzPlug implements Block
                     // browse thresholds from highest to lowest (above 1 to save one test)
                     // assign the first positive match and break the loop
                     for (int thr = maxThresholdIndex; thr > 0; thr--)
-                        if (val >= thresholds[thr])
+                        if (val >= thresholdValues[thr])
                         {
                             Array1DUtil.setValue(_out2D, i, dataType, thr + 1);
                             continue withTheNextPixel;
@@ -421,8 +424,6 @@ public class Thresholder extends EzPlug implements Block
      *        the channel to threshold
      * @param thresholds
      *        the list of thresholds (applied on all sequence frames)
-     * @param inPlace
-     *        true to replace the input by the thresholded data
      * @return the thresholded sequence (if inPlace is true, will return a reference to input)
      */
     public static ROI[] threshold(Sequence input, int c, double[] thresholds)
@@ -440,11 +441,12 @@ public class Thresholder extends EzPlug implements Block
      * Note: thresholds are inclusive: values equal to a threshold are considered as "above"<br>
      * 
      * @param input
+     *        Input sequence.
      * @param c
-     * @param thresholds
+     *        Target channel.
+     * @param thresholdsOverTime
      *        a list of thresholds for each time point of the input sequence
-     * @param inPlace
-     * @return
+     * @return List of threshold result ROIs, one per label.
      */
     public static ROI[] threshold(Sequence input, int c, double[][] thresholdsOverTime)
     {
