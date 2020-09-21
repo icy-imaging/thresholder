@@ -1,8 +1,11 @@
 .idea/
 .settings/
+bin/
 build/
 target/
 *.iml
 *.eml
+*.jar
 .classpath
 .project
+export.jardesc
