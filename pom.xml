@@ -10,7 +10,7 @@
         <version>1.0.4</version>
     </parent>
 
-    <artifactId>icy-thresholder</artifactId>
+    <artifactId>thresholder</artifactId>
     <version>3.5.1</version>
 
     <name>Thresholder</name>
