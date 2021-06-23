@@ -146,6 +146,7 @@ public class Thresholder extends EzPlug implements Block
                         thrs = Arrays.copyOf(thrs, thrs.length);
 
                         // compute one global set of threshold percentile for the sequence
+                        inSeq.loadAllData();
                         double min = inSeq.getChannelMin(c);
                         double max = inSeq.getChannelMax(c);
 
@@ -161,12 +162,13 @@ public class Thresholder extends EzPlug implements Block
                     if (pct.getValue() && timeDependent.getValue())
                     {
                         // interpret thresholds as intensity percentiles
-
+                        inSeq.getImage(t, 0).loadData();
                         double min = inSeq.getImage(t, 0).getChannelMin(c);
                         double max = inSeq.getImage(t, 0).getChannelMax(c);
 
                         for (int z = 1; z < inSeq.getSizeZ(); z++)
                         {
+                            inSeq.getImage(t, z).loadData();
                             double[] sliceBounds = inSeq.getImage(t, z).getChannelBounds(c);
                             if (sliceBounds[0] < min)
                                 min = sliceBounds[0];
@@ -540,7 +542,7 @@ public class Thresholder extends EzPlug implements Block
                         {
                             area3D = new ROI3DArea();
                             area3D.setName("Threshold: " + thresholds[thr]);
-                            area3D.setT(t);
+                            area3D.setT(sizeT == 1?-1:t);
                             // area3D.setC(c);
                         }
                         area3D.setSlice(z, area2D, false);
@@ -548,7 +550,7 @@ public class Thresholder extends EzPlug implements Block
                     else
                     {
                         area2D.setName("Threshold: " + thresholds[thr]);
-                        area2D.setT(t);
+                        area2D.setT(sizeT == 1?-1:t);
                         // area2D.setC(c);
                         // area2D.setZ(z);
                     }

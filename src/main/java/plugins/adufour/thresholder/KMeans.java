@@ -62,6 +62,7 @@ public class KMeans
     {
         double[] thresholds = new double[nbClasses - 1];
 
+        input.loadAllData();
         input.updateChannelsBounds(true);
         double[] minmax = input.getChannelBounds(c);
         double min = minmax[0], max = minmax[1];
@@ -115,6 +116,7 @@ public class KMeans
         double[] thresholds = new double[nbClasses - 1];
 
         // compute min/max on the current stack
+        input.getImage(t, 0).loadData();
         double min = input.getImage(t, 0).getChannelMin(c);
         double max = input.getImage(t, 0).getChannelMax(c);
 
