@@ -7,11 +7,11 @@
     <parent>
         <groupId>org.bioimageanalysis.icy</groupId>
         <artifactId>parent-pom-plugin</artifactId>
-        <version>1.0.3</version>
+        <version>1.0.6</version>
     </parent>
 
     <artifactId>thresholder</artifactId>
-    <version>3.5.2</version>
+    <version>3.5.3</version>
 
     <name>Thresholder</name>
 

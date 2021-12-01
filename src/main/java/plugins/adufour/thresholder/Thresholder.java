@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import icy.gui.frame.progress.FailedAnnounceFrame;
 import icy.image.IcyBufferedImage;
 import icy.roi.BooleanMask2D;
 import icy.roi.ROI;
@@ -122,160 +123,167 @@ public class Thresholder extends EzPlug implements Block
         }
 
         ThresholdMethod algorithm = method.getValue();
-
         double[][] _thrs = new double[inSeq.getSizeT()][];
 
-        switch (method.getValue())
+        try
         {
-            case MANUAL:
+            switch (method.getValue())
             {
-                double[] thrs = thresholds.getValue(true);
-
-                if (thrs.length == 0)
-                    throw new VarException(thresholds.getVariable(), "No threshold(s) indicated");
-
-                if (pct.getValue())
+                case MANUAL:
                 {
-                    for (double thr : thrs)
-                        if (thr < 0.0 || thr > 100.0)
-                            throw new VarException(pct.getVariable(), "Percentile(s) must be between 0 and 100");
+                    double[] thrs = thresholds.getValue(true);
 
-                    if (!timeDependent.getValue())
+                    if (thrs.length == 0)
+                        throw new VarException(thresholds.getVariable(), "No threshold(s) indicated");
+
+                    if (pct.getValue())
                     {
-                        // preserve the original array
-                        thrs = Arrays.copyOf(thrs, thrs.length);
+                        for (double thr : thrs)
+                            if (thr < 0.0 || thr > 100.0)
+                                throw new VarException(pct.getVariable(), "Percentile(s) must be between 0 and 100");
 
-                        // compute one global set of threshold percentile for the sequence
-                        inSeq.loadAllData();
-                        double min = inSeq.getChannelMin(c);
-                        double max = inSeq.getChannelMax(c);
-
-                        for (int i = 0; i < thrs.length; i++)
-                            thrs[i] = min + thrs[i] * (max - min) / 100;
-                    }
-                }
-
-                for (int t = 0; t < inSeq.getSizeT(); t++)
-                {
-                    _thrs[t] = Arrays.copyOf(thrs, thrs.length);
-
-                    if (pct.getValue() && timeDependent.getValue())
-                    {
-                        // interpret thresholds as intensity percentiles
-                        inSeq.getImage(t, 0).loadData();
-                        double min = inSeq.getImage(t, 0).getChannelMin(c);
-                        double max = inSeq.getImage(t, 0).getChannelMax(c);
-
-                        for (int z = 1; z < inSeq.getSizeZ(); z++)
+                        if (!timeDependent.getValue())
                         {
-                            inSeq.getImage(t, z).loadData();
-                            double[] sliceBounds = inSeq.getImage(t, z).getChannelBounds(c);
-                            if (sliceBounds[0] < min)
-                                min = sliceBounds[0];
-                            if (sliceBounds[1] > max)
-                                max = sliceBounds[1];
+                            // preserve the original array
+                            thrs = Arrays.copyOf(thrs, thrs.length);
+
+                            // compute one global set of threshold percentile for the sequence
+                            inSeq.loadAllData();
+                            double min = inSeq.getChannelMin(c);
+                            double max = inSeq.getChannelMax(c);
+
+                            for (int i = 0; i < thrs.length; i++)
+                                thrs[i] = min + thrs[i] * (max - min) / 100;
                         }
-
-                        for (int i = 0; i < _thrs[t].length; i++)
-                            _thrs[t][i] = min + _thrs[t][i] * (max - min) / 100;
-                    }
-                }
-
-                break;
-            }
-            case K_MEANS:
-            {
-                _thrs = KMeans.computeKMeansThresholds(inSeq, c, timeDependent.getValue(),
-                        nbClasses.getValue().shortValue(), KMeans.DEFAULT_KMEANS_BINS);
-                break;
-            }
-            default:
-                throw new UnsupportedOperationException(algorithm + " method");
-        }
-
-        if (blockMode)
-        {
-            if (outLabels.isReferenced())
-            {
-                Sequence sOUT = threshold(inSeq, c, _thrs, false);
-                sOUT.setName(inSeq.getName() + "_thresholded");
-                outLabels.setValue(sOUT);
-            }
-
-            if (outROI.isReferenced())
-            {
-                outROI.setValue(threshold(inSeq, c, _thrs));
-            }
-        }
-        else
-        {
-            switch (outputType.getValue())
-            {
-                case SEQUENCE:
-                {
-                    Sequence sOUT = threshold(inSeq, c, _thrs, inPlace.getValue());
-
-                    String newName = inSeq.getName() + " thresholded";
-
-                    if (!timeDependent.getValue())
-                    {
-                        newName += " at value" + (_thrs[0].length == 1 ? " " : "s ");
-                        newName += _thrs[0][0];
-                        for (int i = 1; i < _thrs[0].length; i++)
-                            newName += ";" + _thrs[0][i];
                     }
 
-                    sOUT.setName(newName);
-
-                    if (inPlace.getValue())
+                    for (int t = 0; t < inSeq.getSizeT(); t++)
                     {
-                        sOUT.dataChanged();
-                    }
-                    else
-                    {
-                        addSequence(sOUT);
-                    }
-                    break;
-                }
-                case ROI:
-                {
-                    inSeq.removeAllROI();
+                        _thrs[t] = Arrays.copyOf(thrs, thrs.length);
 
-                    ROI[] rois = threshold(inSeq, c, _thrs);
-
-                    for (ROI roi : rois)
-                    {
-                        // size check?
-                        double size = roi.getNumberOfPoints();
-                        if (!filterBySize.getValue() || (size >= minSize.getValue() && size <= maxSize.getValue()))
+                        if (pct.getValue() && timeDependent.getValue())
                         {
-                            inSeq.addROI(roi);
+                            // interpret thresholds as intensity percentiles
+                            inSeq.getImage(t, 0).loadData();
+                            double min = inSeq.getImage(t, 0).getChannelMin(c);
+                            double max = inSeq.getImage(t, 0).getChannelMax(c);
+
+                            for (int z = 1; z < inSeq.getSizeZ(); z++)
+                            {
+                                inSeq.getImage(t, z).loadData();
+                                double[] sliceBounds = inSeq.getImage(t, z).getChannelBounds(c);
+                                if (sliceBounds[0] < min)
+                                    min = sliceBounds[0];
+                                if (sliceBounds[1] > max)
+                                    max = sliceBounds[1];
+                            }
+
+                            for (int i = 0; i < _thrs[t].length; i++)
+                                _thrs[t][i] = min + _thrs[t][i] * (max - min) / 100;
                         }
                     }
 
                     break;
                 }
-                case MULTI_ROI:
+                case K_MEANS:
                 {
-                    inSeq.removeAllROI();
+                    _thrs = KMeans.computeKMeansThresholds(inSeq, c, timeDependent.getValue(),
+                            nbClasses.getValue().shortValue(), KMeans.DEFAULT_KMEANS_BINS);
+                    break;
+                }
+                default:
+                    throw new UnsupportedOperationException(algorithm + " method");
+            }
 
-                    Sequence sOUT = threshold(inSeq, c, _thrs, inPlace.getValue());
-                    List<ROI> rois = LabelExtractor.extractLabels(sOUT, ExtractionType.ALL_LABELS_VS_BACKGROUND, 0.0);
-                    for (ROI roi : rois)
+            if (blockMode)
+            {
+                if (outLabels.isReferenced())
+                {
+                    Sequence sOUT = threshold(inSeq, c, _thrs, false);
+                    sOUT.setName(inSeq.getName() + "_thresholded");
+                    outLabels.setValue(sOUT);
+                }
+
+                if (outROI.isReferenced())
+                {
+                    outROI.setValue(threshold(inSeq, c, _thrs));
+                }
+            }
+            else
+            {
+                switch (outputType.getValue())
+                {
+                    case SEQUENCE:
                     {
-                        // if (roi instanceof ROI4D) ((ROI4D) roi).setC(c);
-                        // else if (roi instanceof ROI3D) ((ROI3D) roi).setC(c);
-                        // else if (roi instanceof ROI2D) ((ROI2D) roi).setC(c);
+                        Sequence sOUT = threshold(inSeq, c, _thrs, inPlace.getValue());
 
-                        // size check?
-                        double size = roi.getNumberOfPoints();
-                        if (!filterBySize.getValue() || (size >= minSize.getValue() && size <= maxSize.getValue()))
+                        String newName = inSeq.getName() + " thresholded";
+
+                        if (!timeDependent.getValue())
                         {
-                            inSeq.addROI(roi);
+                            newName += " at value" + (_thrs[0].length == 1 ? " " : "s ");
+                            newName += _thrs[0][0];
+                            for (int i = 1; i < _thrs[0].length; i++)
+                                newName += ";" + _thrs[0][i];
+                        }
+
+                        sOUT.setName(newName);
+
+                        if (inPlace.getValue())
+                        {
+                            sOUT.dataChanged();
+                        }
+                        else
+                        {
+                            addSequence(sOUT);
+                        }
+                        break;
+                    }
+                    case ROI:
+                    {
+                        inSeq.removeAllROI();
+
+                        ROI[] rois = threshold(inSeq, c, _thrs);
+
+                        for (ROI roi : rois)
+                        {
+                            // size check?
+                            double size = roi.getNumberOfPoints();
+                            if (!filterBySize.getValue() || (size >= minSize.getValue() && size <= maxSize.getValue()))
+                            {
+                                inSeq.addROI(roi);
+                            }
+                        }
+
+                        break;
+                    }
+                    case MULTI_ROI:
+                    {
+                        inSeq.removeAllROI();
+
+                        Sequence sOUT = threshold(inSeq, c, _thrs, inPlace.getValue());
+                        List<ROI> rois = LabelExtractor.extractLabels(sOUT, ExtractionType.ALL_LABELS_VS_BACKGROUND,
+                                0.0);
+                        for (ROI roi : rois)
+                        {
+                            // if (roi instanceof ROI4D) ((ROI4D) roi).setC(c);
+                            // else if (roi instanceof ROI3D) ((ROI3D) roi).setC(c);
+                            // else if (roi instanceof ROI2D) ((ROI2D) roi).setC(c);
+
+                            // size check?
+                            double size = roi.getNumberOfPoints();
+                            if (!filterBySize.getValue() || (size >= minSize.getValue() && size <= maxSize.getValue()))
+                            {
+                                inSeq.addROI(roi);
+                            }
                         }
                     }
                 }
             }
+        }
+        catch (InterruptedException e)
+        {
+            new FailedAnnounceFrame(e.getMessage());
         }
     }
 
@@ -427,8 +435,9 @@ public class Thresholder extends EzPlug implements Block
      * @param thresholds
      *        the list of thresholds (applied on all sequence frames)
      * @return the thresholded sequence (if inPlace is true, will return a reference to input)
+     * @throws InterruptedException
      */
-    public static ROI[] threshold(Sequence input, int c, double[] thresholds)
+    public static ROI[] threshold(Sequence input, int c, double[] thresholds) throws InterruptedException
     {
         double[][] thresholdsT = new double[input.getSizeT()][];
         for (int t = 0; t < thresholdsT.length; t++)
@@ -449,8 +458,9 @@ public class Thresholder extends EzPlug implements Block
      * @param thresholdsOverTime
      *        a list of thresholds for each time point of the input sequence
      * @return List of threshold result ROIs, one per label.
+     * @throws InterruptedException
      */
-    public static ROI[] threshold(Sequence input, int c, double[][] thresholdsOverTime)
+    public static ROI[] threshold(Sequence input, int c, double[][] thresholdsOverTime) throws InterruptedException
     {
         if (input == null)
             throw new IllegalArgumentException("Thresholder: no input sequence given");
@@ -542,7 +552,7 @@ public class Thresholder extends EzPlug implements Block
                         {
                             area3D = new ROI3DArea();
                             area3D.setName("Threshold: " + thresholds[thr]);
-                            area3D.setT(sizeT == 1?-1:t);
+                            area3D.setT(sizeT == 1 ? -1 : t);
                             // area3D.setC(c);
                         }
                         area3D.setSlice(z, area2D, false);
@@ -550,7 +560,7 @@ public class Thresholder extends EzPlug implements Block
                     else
                     {
                         area2D.setName("Threshold: " + thresholds[thr]);
-                        area2D.setT(sizeT == 1?-1:t);
+                        area2D.setT(sizeT == 1 ? -1 : t);
                         // area2D.setC(c);
                         // area2D.setZ(z);
                     }
