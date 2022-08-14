@@ -5,17 +5,31 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
+		<artifactId>pom-icy</artifactId>
         <groupId>org.bioimageanalysis.icy</groupId>
-        <artifactId>parent-pom-plugin</artifactId>
-        <version>1.0.6</version>
-    </parent>
+        <version>2.0.0</version>
+	</parent>
 
     <artifactId>thresholder</artifactId>
     <version>3.5.3</version>
 
     <name>Thresholder</name>
+	
+	<profiles>
+        <profile>
+            <id>icy-plugin</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
 
     <dependencies>
+		<dependency>
+            <groupId>org.bioimageanalysis.icy</groupId>
+            <artifactId>icy-kernel</artifactId>
+			<version>${icy-kernel.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.bioimageanalysis.icy</groupId>
             <artifactId>blocks</artifactId>
