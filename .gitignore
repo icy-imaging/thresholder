@@ -9,3 +9,4 @@ target/
 .classpath
 .project
 export.jardesc
+**/.DS_Store
