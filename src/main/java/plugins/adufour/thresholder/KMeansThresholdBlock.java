@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2010-2023. Institut Pasteur.
+ *
+ * This file is part of Icy.
+ * Icy is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Icy is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Icy. If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package plugins.adufour.thresholder;
 
 import icy.plugin.abstract_.Plugin;
@@ -20,24 +38,24 @@ public class KMeansThresholdBlock extends Plugin implements Block, PluginBundled
 
     @Override
     public void run() {
-        Sequence seq = input.getValue();
+        final Sequence seq = input.getValue();
 
         if (seq == null) throw new VarException(input, "Thresholder: no sequence selected");
 
-        int c = channel.getValue();
-        int sizeC = seq.getSizeC();
+        final int c = channel.getValue();
+        final int sizeC = seq.getSizeC();
 
         if (c >= sizeC) throw new VarException(channel, "Thresholder: channel " + c + " does not exist");
 
-        int nC = nbClasses.getValue();
+        final int nC = nbClasses.getValue();
 
-        double[][] thrs = KMeans.computeKMeansThresholds(seq, nC);
+        final double[][] thrs = KMeans.computeKMeansThresholds(seq, nC);
 
         thresholds.setValue(thrs[c]);
     }
 
     @Override
-    public void declareInput(VarList inputMap) {
+    public void declareInput(final VarList inputMap) {
         nbClasses.setDefaultEditorModel(new IntegerRangeModel(2, 2, 65535, 1));
         channel.setDefaultEditorModel(new IntegerRangeModel(0, 0, 65535, 1));
 
@@ -47,7 +65,7 @@ public class KMeansThresholdBlock extends Plugin implements Block, PluginBundled
     }
 
     @Override
-    public void declareOutput(VarList outputMap) {
+    public void declareOutput(final VarList outputMap) {
         outputMap.add("thresholds", thresholds);
     }
 

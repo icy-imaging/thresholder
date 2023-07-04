@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>thresholder</artifactId>
-    <version>3.5.4</version>
+    <version>4.0.0</version>
 
     <name>Thresholder</name>
 
