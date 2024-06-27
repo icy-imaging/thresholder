@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2023. Institut Pasteur.
+ * Copyright (c) 2010-2024. Institut Pasteur.
  *
  * This file is part of Icy.
  * Icy is free software: you can redistribute it and/or modify
@@ -18,8 +18,8 @@
 
 package plugins.adufour.thresholder;
 
-import icy.sequence.Sequence;
-import icy.type.collection.array.Array1DUtil;
+import org.bioimageanalysis.icy.common.collection.array.Array1DUtil;
+import org.bioimageanalysis.icy.model.sequence.Sequence;
 
 import java.util.Arrays;
 

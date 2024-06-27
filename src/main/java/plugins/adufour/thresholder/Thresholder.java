@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2023. Institut Pasteur.
+ * Copyright (c) 2010-2024. Institut Pasteur.
  *
  * This file is part of Icy.
  * Icy is free software: you can redistribute it and/or modify
@@ -18,13 +18,17 @@
 
 package plugins.adufour.thresholder;
 
-import icy.gui.frame.progress.FailedAnnounceFrame;
-import icy.image.IcyBufferedImage;
-import icy.roi.BooleanMask2D;
-import icy.roi.ROI;
-import icy.sequence.Sequence;
-import icy.type.DataType;
-import icy.type.collection.array.Array1DUtil;
+import org.bioimageanalysis.extension.kernel.roi.roi2d.ROI2DArea;
+import org.bioimageanalysis.extension.kernel.roi.roi3d.ROI3DArea;
+import org.bioimageanalysis.icy.common.collection.array.Array1DUtil;
+import org.bioimageanalysis.icy.common.type.DataType;
+import org.bioimageanalysis.icy.extension.plugin.annotation_.IcyPluginIcon;
+import org.bioimageanalysis.icy.extension.plugin.annotation_.IcyPluginName;
+import org.bioimageanalysis.icy.gui.frame.progress.FailedAnnounceFrame;
+import org.bioimageanalysis.icy.model.image.IcyBufferedImage;
+import org.bioimageanalysis.icy.model.roi.ROI;
+import org.bioimageanalysis.icy.model.roi.mask.BooleanMask2D;
+import org.bioimageanalysis.icy.model.sequence.Sequence;
 import plugins.adufour.blocks.lang.Block;
 import plugins.adufour.blocks.util.VarList;
 import plugins.adufour.ezplug.*;
@@ -33,14 +37,14 @@ import plugins.adufour.roi.LabelExtractor.ExtractionType;
 import plugins.adufour.vars.lang.VarROIArray;
 import plugins.adufour.vars.lang.VarSequence;
 import plugins.adufour.vars.util.VarException;
-import plugins.kernel.roi.roi2d.ROI2DArea;
-import plugins.kernel.roi.roi3d.ROI3DArea;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@IcyPluginName("Thresholder")
+@IcyPluginIcon(path = "/thresholder.png")
 public class Thresholder extends EzPlug implements Block {
     private enum ThresholdMethod {
         MANUAL, K_MEANS
@@ -300,7 +304,7 @@ public class Thresholder extends EzPlug implements Block {
 
         final Sequence output = inPlace ? input : new Sequence();
 
-        final DataType dataType = input.getDataType_();
+        final DataType dataType = input.getDataType();
 
         final int length = input.getSizeX() * input.getSizeY();
 
@@ -420,7 +424,7 @@ public class Thresholder extends EzPlug implements Block {
 
         final ArrayList<ROI> output = new ArrayList<>(sizeT);
 
-        final DataType dataType = input.getDataType_();
+        final DataType dataType = input.getDataType();
 
         for (int t = 0; t < sizeT; t++) {
             final double[] thresholds = thresholdsOverTime[t];
