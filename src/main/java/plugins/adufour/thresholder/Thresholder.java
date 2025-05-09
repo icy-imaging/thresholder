@@ -45,7 +45,7 @@ import java.util.List;
 
 @IcyPluginName("Thresholder")
 @IcyPluginIcon(path = "/thresholder.png")
-public class Thresholder extends EzPlug implements Block {
+public class Thresholder extends EzPlug {
     private enum ThresholdMethod {
         MANUAL, K_MEANS
     }
@@ -522,21 +522,4 @@ public class Thresholder extends EzPlug implements Block {
     @Override
     public void clean() {
     }
-
-    @Override
-    public void declareInput(final VarList inputMap) {
-        blockMode = true;
-        in.getVariable().setOptional(true);
-        inputMap.add("Input", in.getVariable());
-        inputMap.add("channel", channel.getVariable());
-        inputMap.add("Manual thresholds", thresholds.getVariable());
-        inputMap.add("Treat as percentiles", pct.getVariable());
-    }
-
-    @Override
-    public void declareOutput(final VarList outputMap) {
-        outputMap.add("output", outLabels);
-        outputMap.add("ROI", outROI);
-    }
-
 }
