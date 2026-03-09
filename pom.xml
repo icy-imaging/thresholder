@@ -7,18 +7,85 @@
     <parent>
         <groupId>org.bioimageanalysis.icy</groupId>
         <artifactId>pom-icy</artifactId>
-        <version>3.0.0-a.4</version>
+        <version>3.0.0-a.5</version>
     </parent>
 
     <artifactId>thresholder</artifactId>
-    <version>4.0.0-a.3</version>
+    <version>4.0.0-a.5</version>
 
     <name>Thresholder</name>
+    <description>
+        Extract image features based on one or more intensity thresholds,
+        and output the result as a labeled image or as a region of interest.
+    </description>
+    <url>https://icy.bioimageanalysis.org/</url>
+    <inceptionYear>2011</inceptionYear>
+
+    <scm>
+        <url>https://gitlab.pasteur.fr/bia/icy/extensions/thresholder</url>
+        <tag>v${project.version}</tag>
+    </scm>
+
+    <issueManagement>
+        <system>GitLab Issues</system>
+        <url>https://gitlab.pasteur.fr/bia/icy/extensions/thresholder/-/issues</url>
+    </issueManagement>
+    <ciManagement>
+        <system>GitLab CI</system>
+        <url>https://gitlab.pasteur.fr/bia/icy/extensions/thresholder/-/pipelines</url>
+    </ciManagement>
+
+    <organization>
+        <name>Institut Pasteur</name>
+        <url>https://www.pasteur.fr/</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>GNU LGPLv3</name>
+            <url>https://www.gnu.org/licenses/lgpl-3.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>tmusset</id>
+            <name>Thomas Musset</name>
+            <organization>Institut Pasteur</organization>
+            <organizationUrl>https://pasteur.fr</organizationUrl>
+            <url>https://icy.bioimageanalysis.org/author/tmusset/</url>
+        </developer>
+    </developers>
+
+    <contributors>
+        <contributor>
+            <name>Alexandre Dufour</name>
+            <roles>
+                <role>founder</role>
+            </roles>
+        </contributor>
+        <contributor>
+            <name>Stéphane Dallongeville</name>
+        </contributor>
+    </contributors>
+
+    <mailingLists>
+        <mailingList>
+            <name>Icy</name>
+            <post>icy.team@pasteur.fr</post>
+        </mailingList>
+    </mailingLists>
+
+    <properties>
+        <license.licenseName>GNU LGPLv3</license.licenseName>
+        <license.copyrightOwners>Institut Pasteur</license.copyrightOwners>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.bioimageanalysis.icy</groupId>
-            <artifactId>kernel-extensions</artifactId>
+            <artifactId>kernel-extension</artifactId>
         </dependency>
         <dependency>
             <groupId>org.bioimageanalysis.icy</groupId>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2024. Institut Pasteur.
+ * Copyright (c) 2010-2026. Institut Pasteur.
  *
  * This file is part of Icy.
  * Icy is free software: you can redistribute it and/or modify
@@ -19,9 +19,7 @@
 package plugins.adufour.thresholder;
 
 import org.bioimageanalysis.icy.extension.plugin.abstract_.Plugin;
-import org.bioimageanalysis.icy.extension.plugin.annotation_.IcyPluginIcon;
 import org.bioimageanalysis.icy.extension.plugin.annotation_.IcyPluginName;
-import org.bioimageanalysis.icy.extension.plugin.interface_.PluginBundled;
 import org.bioimageanalysis.icy.model.sequence.Sequence;
 import plugins.adufour.blocks.lang.Block;
 import plugins.adufour.blocks.util.VarList;
@@ -32,8 +30,7 @@ import plugins.adufour.vars.lang.VarSequence;
 import plugins.adufour.vars.util.VarException;
 
 @IcyPluginName("KMeans Threshold")
-@IcyPluginIcon(path = "/thresholder.png")
-public class KMeansThresholdBlock extends Plugin implements Block, PluginBundled {
+public class KMeansThresholdBlock extends Plugin implements Block {
     VarSequence input = new VarSequence("Input", null);
     VarInteger channel = new VarInteger("Channel", 0);
     VarInteger nbClasses = new VarInteger("Classes", 2);
@@ -71,11 +68,6 @@ public class KMeansThresholdBlock extends Plugin implements Block, PluginBundled
     @Override
     public void declareOutput(final VarList outputMap) {
         outputMap.add("thresholds", thresholds);
-    }
-
-    @Override
-    public String getMainPluginClassName() {
-        return Thresholder.class.getCanonicalName();
     }
 
 }

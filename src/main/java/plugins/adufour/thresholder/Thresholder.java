@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2010-2024. Institut Pasteur.
+ * Copyright (c) 2010-2026. Institut Pasteur.
  *
  * This file is part of Icy.
  * Icy is free software: you can redistribute it and/or modify
@@ -22,15 +22,12 @@ import org.bioimageanalysis.extension.kernel.roi.roi2d.ROI2DArea;
 import org.bioimageanalysis.extension.kernel.roi.roi3d.ROI3DArea;
 import org.bioimageanalysis.icy.common.collection.array.Array1DUtil;
 import org.bioimageanalysis.icy.common.type.DataType;
-import org.bioimageanalysis.icy.extension.plugin.annotation_.IcyPluginIcon;
 import org.bioimageanalysis.icy.extension.plugin.annotation_.IcyPluginName;
 import org.bioimageanalysis.icy.gui.frame.progress.FailedAnnounceFrame;
 import org.bioimageanalysis.icy.model.image.IcyBufferedImage;
 import org.bioimageanalysis.icy.model.roi.ROI;
 import org.bioimageanalysis.icy.model.roi.mask.BooleanMask2D;
 import org.bioimageanalysis.icy.model.sequence.Sequence;
-import plugins.adufour.blocks.lang.Block;
-import plugins.adufour.blocks.util.VarList;
 import plugins.adufour.ezplug.*;
 import plugins.adufour.roi.LabelExtractor;
 import plugins.adufour.roi.LabelExtractor.ExtractionType;
@@ -44,7 +41,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @IcyPluginName("Thresholder")
-@IcyPluginIcon(path = "/thresholder.png")
 public class Thresholder extends EzPlug {
     private enum ThresholdMethod {
         MANUAL, K_MEANS
