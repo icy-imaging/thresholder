@@ -18,17 +18,17 @@
 
 package plugins.adufour.thresholder;
 
-import org.bioimageanalysis.extension.kernel.roi.roi2d.ROI2DArea;
-import org.bioimageanalysis.extension.kernel.roi.roi3d.ROI3DArea;
-import org.bioimageanalysis.icy.common.collection.array.Array1DUtil;
-import org.bioimageanalysis.icy.common.type.DataType;
-import org.bioimageanalysis.icy.extension.plugin.abstract_.Plugin;
-import org.bioimageanalysis.icy.extension.plugin.annotation_.IcyPluginName;
-import org.bioimageanalysis.icy.gui.frame.progress.FailedAnnounceFrame;
-import org.bioimageanalysis.icy.model.image.IcyBufferedImage;
-import org.bioimageanalysis.icy.model.roi.ROI;
-import org.bioimageanalysis.icy.model.roi.mask.BooleanMask2D;
-import org.bioimageanalysis.icy.model.sequence.Sequence;
+import fr.icy.extension.kernel.roi.roi2d.ROI2DArea;
+import fr.icy.extension.kernel.roi.roi3d.ROI3DArea;
+import fr.icy.common.collection.array.Array1DUtil;
+import fr.icy.common.type.DataType;
+import fr.icy.extension.plugin.abstract_.Plugin;
+import fr.icy.extension.plugin.annotation_.IcyPluginName;
+import fr.icy.gui.frame.progress.FailedAnnounceFrame;
+import fr.icy.model.image.IcyBufferedImage;
+import fr.icy.model.roi.ROI;
+import fr.icy.model.roi.mask.BooleanMask2D;
+import fr.icy.model.sequence.Sequence;
 import plugins.adufour.blocks.lang.Block;
 import plugins.adufour.blocks.util.VarList;
 import plugins.adufour.roi.LabelExtractor;

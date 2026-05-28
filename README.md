@@ -1,4 +1,4 @@
-![Version 4.0.0 alpha 5](https://img.shields.io/badge/v4.0.0-alpha_5-royalblue)
+![Version 4.0.0 alpha 7](https://img.shields.io/badge/v4.0.0-alpha_7-royalblue)
 ![Java 17+](https://img.shields.io/badge/OpenJDK-17+-5382A1?labelColor=E76F00)
 [![License: LGPL v3](https://img.shields.io/badge/LGPLv3-008033?logo=GPLv3&logoSize=auto)](https://www.gnu.org/licenses/lgpl-3.0)
 [![Twitter](https://img.shields.io/twitter/follow/Icy_BioImaging)](https://x.com/Icy_BioImaging)
@@ -41,8 +41,9 @@ More detailed user documentation can be found on the Track Processor Excel Expor
 Add this dependency block in your `pom.xml`
 ```xml
 <dependency>
-    <groupId>org.bioimageanalysis.icy</groupId>
+    <groupId>fr.icy.extensions</groupId>
     <artifactId>thresholder</artifactId>
+    <version>${fr.icy.Extensions.thresholder.version}</version>
 </dependency>
 ```
 
