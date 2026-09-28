@@ -336,7 +336,7 @@ public class Thresholder extends EzPlug {
 
                 withTheNextPixel:
                 for (int i = 0; i < length; i++) {
-                    final double val = _in2D == null ? 0 : Array1DUtil.getValue(_in2D, i, dataType);
+                    final double val = _in2D == null ? 0 : Array1DUtil.getValueAsDouble(_in2D, i, dataType);
 
                     // background
                     if (val < thr0) {
@@ -449,7 +449,7 @@ public class Thresholder extends EzPlug {
 
                 withTheNextPixel:
                 for (int i = 0; i < sliceSize; i++) {
-                    final double val = Array1DUtil.getValue(_in2D, i, dataType);
+                    final double val = Array1DUtil.getValueAsDouble(_in2D, i, dataType);
 
                     // background
                     if (val < thr0)

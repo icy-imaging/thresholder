@@ -1,4 +1,4 @@
-![Version 4.0.0 alpha 7](https://img.shields.io/badge/v4.0.0-alpha_7-royalblue)
+![Version 4.0.0 alpha 8](https://img.shields.io/badge/v4.0.0-alpha_8-royalblue)
 ![Java 17+](https://img.shields.io/badge/OpenJDK-17+-5382A1?labelColor=E76F00)
 [![License: LGPL v3](https://img.shields.io/badge/LGPLv3-008033?logo=GPLv3&logoSize=auto)](https://www.gnu.org/licenses/lgpl-3.0)
 [![Twitter](https://img.shields.io/twitter/follow/Icy_BioImaging)](https://x.com/Icy_BioImaging)
@@ -14,9 +14,8 @@ Icy is developed and maintained by [Biological Image Analysis unit at Institut P
 This plug-in extracts area in the image according to their pixel value, based on some user-defined (or automatically calculated) thresholds.
 
 To describe how the plug-in works, let’s assume we have a single channel 8-bit image (values ranging from 0 to 255).
-The description below still stands for multichannel data (each channel will be processed separately) and non-8-bit data (there is no restriction on the data type).
 
-More detailed user documentation can be found on the Track Processor Excel Export documentation page on the Icy website: https://icy.bioimageanalysis.org/plugins/thresholder/
+The description below still stands for multichannel data (each channel will be processed separately) and non-8-bit data (there is no restriction on the data type).
 
 ## Installation instructions
 
@@ -41,9 +40,9 @@ More detailed user documentation can be found on the Track Processor Excel Expor
 Add this dependency block in your `pom.xml`
 ```xml
 <dependency>
-    <groupId>fr.icy.extensions</groupId>
+    <groupId>fr.icy.extension</groupId>
     <artifactId>thresholder</artifactId>
-    <version>${fr.icy.Extensions.thresholder.version}</version>
+    <version>${fr.icy.extension.thresholder.version}</version>
 </dependency>
 ```
 
